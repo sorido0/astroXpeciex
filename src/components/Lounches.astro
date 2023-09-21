@@ -1,0 +1,22 @@
+---
+import { getLounchesApi } from "../services/apiLounch.ts";
+import CardLounches from "../components/CardLounches.astro";
+
+const docs = await getLounchesApi();
+---
+
+<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+        docs.map(
+            ({ id, details, links, success, flight_number: flightNumber }) => (
+                <CardLounches
+                    id={id}
+                    details={details}
+                    img={links.patch.small}
+                    flightNumber={flightNumber}
+                    success={success}
+                />
+            ),
+        )
+    }
+</div>
